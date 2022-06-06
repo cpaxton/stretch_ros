@@ -3,6 +3,11 @@
 \#*\#
 .\#*
 
+# Vim related
+*.swp
+*.swo
+*.swn
+
 # Python related
 *.pyc
 *.so
