@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--This does not replace URDF, and is not an extension of URDF.
-    This is a format for representing semantic information about the robot structure.
-    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+This is a format for representing semantic information about the robot structure.
+A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
 -->
 <robot name="stretch_description">
     <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
@@ -39,8 +39,10 @@
         <joint name="joint_arm_l1" value="0"/>
         <joint name="joint_arm_l2" value="0"/>
         <joint name="joint_arm_l3" value="0"/>
-        <joint name="joint_lift" value="0"/>
+        <joint name="joint_lift" value="0.1"/>
         <joint name="joint_wrist_yaw" value="0"/>
+        <joint name="joint_wrist_pitch" value="0"/>
+        <joint name="joint_wrist_roll" value="0"/>
     </group_state>
     <group_state name="extended" group="stretch_arm">
         <joint name="joint_arm_l0" value="0.13"/>
@@ -49,6 +51,8 @@
         <joint name="joint_arm_l3" value="0.13"/>
         <joint name="joint_lift" value="0.9967"/>
         <joint name="joint_wrist_yaw" value="4"/>
+        <joint name="joint_wrist_pitch" value="0"/>
+        <joint name="joint_wrist_roll" value="0"/>
     </group_state>
     <group_state name="home" group="stretch_head">
         <joint name="joint_head_pan" value="0.0"/>
@@ -72,9 +76,9 @@
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="gripper" parent_link="link_grasp_center" group="stretch_arm"/>
-    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-    <!--virtual_joint name="position" type="floating" parent_frame="map" child_link="base_link"/-->
-    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+        <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+        <!--virtual_joint name="position" type="floating" parent_frame="map" child_link="base_link"/-->
+        <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="base_link" link2="camera_link" reason="Never"/>
     <disable_collisions link1="base_link" link2="laser" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="link_arm_l0" reason="Never"/>
@@ -407,4 +411,15 @@
     <disable_collisions link1="link_right_wheel" link2="respeaker_base" reason="Never"/>
     <disable_collisions link1="link_wrist_yaw" link2="respeaker_base" reason="Never"/>
     <disable_collisions link1="caster_link" link2="base_link" reason="Adjacent"/>
+
+    <!-- Dex wrist stuff -->
+    <disable_collisions link1="link_wrist_pitch" link2="link_wrist_roll" reason="Adjacent"/>
+    <disable_collisions link1="link_wrist_yaw" link2="link_wrist_yaw_bottom" reason="Adjacent"/>
+    <disable_collisions link1="link_wrist_pitch" link2="link_wrist_yaw_bottom" reason="Adjacent"/>
+    <disable_collisions link1="link_wrist_roll" link2="link_straight_gripper" reason="Adjacent"/>
+
+    <!-- Gripper stuff -->
+    <disable_collisions link1="link_gripper_finger_right" link2="link_straight_gripper" reason="Adjacent"/>
+    <disable_collisions link1="link_gripper_finger_left" link2="link_straight_gripper" reason="Adjacent"/>
+    
 </robot>
