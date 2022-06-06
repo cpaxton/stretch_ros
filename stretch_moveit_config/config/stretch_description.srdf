@@ -17,6 +17,8 @@
         <joint name="joint_arm_l1"/>
         <joint name="joint_arm_l0"/>
         <joint name="joint_wrist_yaw"/>
+        <joint name="joint_wrist_pitch"/>
+        <joint name="joint_wrist_roll"/>
     </group>
     <group name="stretch_gripper">
         <link name="link_gripper"/>
