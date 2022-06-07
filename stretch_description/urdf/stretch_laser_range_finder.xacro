@@ -32,6 +32,12 @@
       </material>
     </visual>
     <collision>
+      <origin rpy="-1.570796 1.570796 1.570796" xyz="-0.000750 0.000000 0.000000"/>
+      <geometry>
+        <box size="0.019500 0.069940 0.069940"/>
+      </geometry>
+    </collision>
+    <!--collision>
       <origin
         xyz="0 0 0"
         rpy="0 0 0" />
@@ -39,7 +45,7 @@
         <mesh
           filename="package://stretch_description/meshes/laser.STL" />
       </geometry>
-    </collision>
+    </collision-->
   </link>
   
   <joint
