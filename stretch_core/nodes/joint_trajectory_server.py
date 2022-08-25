@@ -61,6 +61,7 @@ class JointTrajectoryAction:
 
         ###################################################
         # Decide what to do based on the commanded joints.
+        print("robot mode =", self.node.robot_mode)
         updates = [c.update(commanded_joint_names, self.invalid_joints_callback,
                    robot_mode=self.node.robot_mode)
                    for c in self.command_groups]
@@ -174,7 +175,11 @@ class JointTrajectoryAction:
         clean_named_errors = []
         for named_error in named_errors:
             if type(named_error) == tuple:
-                clean_named_errors.append(named_error)
+                if type(named_error[0]) == list:
+                    for ne in named_error[0]:
+                        clean_named_errors.append((ne, named_error[1]))
+                else:
+                    clean_named_errors.append(named_error)
             elif type(named_error) == list:
                 clean_named_errors += named_error
         clean_named_errors_dict = dict((k, v) for k, v in clean_named_errors)
